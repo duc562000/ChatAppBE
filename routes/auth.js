@@ -40,8 +40,8 @@ router.post("/sign-up", async (req, res) => {
 // Check existing user
 
 router.post("/check-existing-user", async (req, res) => {
-    const { username } = req.body;
-    const myUser = await UserModel.get(username);
+    const { phone } = req.body;
+    const myUser = await UserModel.get(phone);
     if (myUser) {
         return res.status(200).json({ message: "Username existing", status: false });
     } else {
@@ -135,7 +135,6 @@ router.get("/form", (req, res) => {
 //     });
 // });
 
-
 router.post("/update-info/:id", async (req, res) => {
     try {
         const id = req.params.id;
@@ -159,8 +158,6 @@ router.post("/update-info/:id", async (req, res) => {
         res.status(500).json({ error: "Error updating user information" });
     }
 });
-
-
 
 router.patch("/update-password", async (req, res) => {
     await UserController.updatePasswordByID(req, res);
